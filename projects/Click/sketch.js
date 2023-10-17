@@ -1,3 +1,6 @@
+// start settings game end
+var screen = 'start'
+
 var xPos, yPos;
 var score = 0;
 
@@ -9,11 +12,8 @@ function setup() {
 }
 
 function draw() {
-  background(220);
-  fill(255, 0, 0);
-  rect(xPos, yPos, 50);
-  fill(0);
-  text("Score: " + score, 10, 10);
+  if(screen == 'start') startScreen();
+  if(screen == 'game') gameScreen();
 }
 
 function mouseClicked() {
@@ -28,4 +28,18 @@ function mouseClicked() {
     xPos = random(width - 50);
     yPos = random(height - 50);
   }
+}
+
+function startScreen() {
+  background(255, 0, 0);
+  fill(0);
+  text("Click to start", 10, 10);
+}
+
+function gameScreen() {
+  background(220);
+  fill(255, 0, 0);
+  rect(xPos, yPos, 50);
+  fill(0);
+  text("Score: " + score, 10, 10);
 }
