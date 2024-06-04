@@ -1,30 +1,64 @@
-// This is an example button component for use with p5js
-//! Text mode must be CENTER
+// A customizable and robust button component for p5.js
+//! Supports text alignment and custom colors for normnal, hover, and active states
 
 class Button {
-    constructor(x, y, width, height, text, onClick) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.text = text;
-        this.onClick = onClick;
+    constructor(
+      x,
+      y,
+      width,
+      height,
+      text,
+      onClick,
+      fillColor = "#ffff00",
+      hoverColor = "#ff0000",
+      activeColor = "#0000ff",
+      textColor = "#000000",
+    ) {
+      this.x = x;
+      this.y = y;
+      this.width = width;
+      this.height = height;
+      this.text = text;
+      this.onClick = onClick;
+      this.fillColor = fillColor;
+      this.hoverColor = hoverColor;
+      this.activeColor = activeColor;
+      this.textColor = textColor;
     }
-
+  
     draw() {
-        if(this.isMouseInside()) {
-            fill(255, 0, 0);
+      // Set the fill color based on the mouse state
+      if (this.isMouseOver()) {
+        if (this.isMousePressed) {
+          fill(this.activeColor);
         } else {
-            fill(255, 255, 0);
+          fill(this.hoverColor);
         }
-        rect(this.x, this.y, this.width, this.height);
-        fill(0);
-        textSize(20);
-        text(this.text, this.x + this.width / 2, this.y + this.height / 2);
+      } else {
+        fill(this.fillColor);
+      }
+  
+      // Draw the button
+      rect(this.x, this.y, this.width, this.height);
+  
+      fill(this.textColor);
+  
+      textSize(20);
+      text(this.text, this.x + this.width / 2, this.y + this.height / 2);
     }
-
-    // helper to determine if mouse is within button
-    isMouseInside() {
-        return mouseX > this.x && mouseX < this.x + this.width && mouseY > this.y && mouseY < this.y + this.height;
+  
+    // Check if the mouse is over the button
+    isMouseOver() {
+      return (
+        mouseX > this.x &&
+        mouseX < this.x + this.width &&
+        mouseY > this.y &&
+        mouseY < this.y + this.height
+      );
     }
-}
+  
+    // Check if the mouse is pressed
+    get isMousePressed() {
+      return mouseIsPressed && this.isMouseOver();
+    }
+  }
