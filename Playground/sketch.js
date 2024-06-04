@@ -1,7 +1,7 @@
-
-var testButton = new Button(100, 100, 100, 50, "Test Button", 15, function() {
+var buttons = [];
+buttons.push(new Button(100, 100, 100, 50, "Test Button", 15, function() {
     console.log(Math.random());
-},);
+},));
 
 function setup() {
     createCanvas(400, 400);
@@ -10,5 +10,15 @@ function setup() {
 }
 
 function draw() {
-    testButton.draw();
+    buttons.forEach(button => {
+        button.draw();
+    });
+}
+
+function mouseClicked() {
+    buttons.forEach(button => {
+        if (button.isMouseOver()) {
+            button.onClick();
+        }
+    });
 }
