@@ -8,6 +8,7 @@ class Button {
       width,
       height,
       text,
+      textSize,
       onClick,
       fillColor = "#ffff00",
       hoverColor = "#ff0000",
@@ -19,6 +20,7 @@ class Button {
       this.width = width;
       this.height = height;
       this.text = text;
+      this.textSize = textSize;
       this.onClick = onClick;
       this.fillColor = fillColor;
       this.hoverColor = hoverColor;
@@ -31,6 +33,7 @@ class Button {
       if (this.isMouseOver()) {
         if (this.isMousePressed) {
           fill(this.activeColor);
+          this.onClick();
         } else {
           fill(this.hoverColor);
         }
@@ -43,7 +46,7 @@ class Button {
   
       fill(this.textColor);
   
-      textSize(20);
+      textSize(this.textSize);
       text(this.text, this.x + this.width / 2, this.y + this.height / 2);
     }
   
