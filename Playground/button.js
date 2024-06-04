@@ -33,7 +33,6 @@ class Button {
       if (this.isMouseOver()) {
         if (this.isMousePressed) {
           fill(this.activeColor);
-          this.onClick();
         } else {
           fill(this.hoverColor);
         }
