@@ -4,11 +4,19 @@ var screen = 'start'
 var xPos, yPos;
 var score = 0;
 
+var testButton = new Button(200, 200, 100, 50, "Start", function() {
+  screen = 'game';
+  console.log("Button clicked");
+});
+
+var buttons = [];
+
 function setup() {
   createCanvas(400, 400);
   xPos = random(width - 50);
   yPos = random(height - 50);
   noStroke();
+  textAlign(CENTER, CENTER);
 }
 
 function draw() {
@@ -17,23 +25,22 @@ function draw() {
 }
 
 function mouseClicked() {
-  // Check if the mouse is inside the square
-  if (
-    mouseX > xPos &&
-    mouseX < xPos + 50 &&
-    mouseY > yPos &&
-    mouseY < yPos + 50
-  ) {
-    score++;
-    xPos = random(width - 50);
-    yPos = random(height - 50);
+  if(screen == 'start') {
+    testButton.onClick();
+  }
+  if(sreen = 'game') {
+    if(mouseX > xPos && mouseX < xPos + 50 && mouseY > yPos && mouseY < yPos + 50) {
+      xPos = random(width - 50);
+      yPos = random(height - 50);
+      score++;
+    }
   }
 }
 
 function startScreen() {
-  background(255, 0, 0);
+  background(0, 0, 255);
   fill(0);
-  text("Click to start", 10, 10);
+  testButton.draw();
 }
 
 function gameScreen() {
