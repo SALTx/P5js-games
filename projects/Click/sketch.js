@@ -11,9 +11,9 @@ var highscore = 0;
 // Start buttons
 
 // Game buttons
-var testButton = new Button(200, 200, 100, 50, "Start", function() {
+var startButton = new Button(150, 200, 100, 50, "Start", function() {
   screen = 'game';
-  console.log("Button clicked");
+  console.log("Game started");
 });
 
 // End buttons
@@ -39,12 +39,11 @@ function draw() {
   if(screen == 'start') startScreen();
   if(screen == 'game') gameScreen();
   if(screen == 'end') endScreen();
-  text(timer, 10, 350);
 }
 
 function mouseClicked() {
   if(screen == 'start') {
-    testButton.onClick();
+    startButton.onClick();
   }
   if(sreen = 'game') {
     // check if the mouse is inside the target square
@@ -56,14 +55,18 @@ function mouseClicked() {
   }
   if(screen == 'end') {
     score = 0;
-    screen = 'game';
+    screen = 'start';
   }
 }
 
 function startScreen() {
-  background(0, 0, 255);
+  background(60, 60, 255);
+  textFont("Impact", 52);
+  text("Click", width / 2, height / 3);
+  textFont("Arial", 16);
+  text("Highscore: " + highscore, width / 2, height / 3 + 50);
   fill(0);
-  testButton.draw();
+  startButton.draw();
 }
 
 function gameScreen() {
@@ -72,11 +75,12 @@ function gameScreen() {
     screen = 'end';
     timer = 300;
   }
-  background(220);
-  fill(255, 0, 0);
+  background(40, 40, 255);
+  fill(255, 255, 40);
   rect(xPos, yPos, 50);
   fill(0);
-  text("Score: " + score, 10, 10);
+  text("Score: " + score, 40, 20);
+  text("Time: " + Math.floor(timer / 30), 40, 40);
 }
 
 function endScreen() {
