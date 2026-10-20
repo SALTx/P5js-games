@@ -30,4 +30,10 @@ class Button {
         // draw a rectangle
         rect(this.x, this.y, this.width, this.height);
     }
+
+    onClick() {
+        if(this.isHover()) {
+            this.callback();
+        }
+    }
 }

@@ -1,5 +1,10 @@
+// alert
+function saySomething() {
+  alert("RAHHHHHH");
+}
+
 // my button
-let myFirstButton = new Button(200, 200, 100, 50);
+let myFirstButton = new Button(200, 200, 100, 50, saySomething);
 
 
 function setup() {
@@ -9,4 +14,8 @@ function setup() {
 
 function draw() {
   myFirstButton.render();
+}
+
+function mouseClicked() {
+  myFirstButton.onClick();
 }
