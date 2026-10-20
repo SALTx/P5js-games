@@ -14,9 +14,10 @@ class Button {
         this.callback = callback;
 
         // styles and stuffs
-        this.style = new UIStyle(color(255, 0, 0), color(0, 255, 0));
-        this.strokeStyle = new StrokeStyle(color(0, 0, 0), color(0, 0, 0), 2);
-        this.textStyle = new TextStyle(color(0), color(255), 'Arial', 24);
+        // Plain RGB arrays are used because color() isn't available before p5's setup()
+        this.style = new UIStyle([70, 130, 220], [100, 160, 245]);
+        this.strokeStyle = new StrokeStyle([30, 60, 120], [30, 60, 120], 2);
+        this.textStyle = new TextStyle([255, 255, 255], [255, 255, 255], 'Arial', 18);
     }
 
     // static function to render buttons of an array
@@ -62,8 +63,8 @@ class Button {
         rect(this.x, this.y, this.width, this.height);
 
         // draw the text on the button
-        fill(this.txt.primaryColor); // Set the fill color to text primary color
-        // textFont(this.textStyle.fontName); // Broken
+        fill(this.textStyle.primaryColor); // Set the fill color to text primary color
+        textFont(this.textStyle.fontName); // Broken
         textSize(this.textStyle.fontSize);
         strokeWeight(1); // Text inherits stroke 
         text(this.txt, this.x + (this.width / 2), this.y + (this.height / 2));
