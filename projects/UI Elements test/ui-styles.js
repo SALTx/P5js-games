@@ -17,7 +17,7 @@ class StrokeStyle {
 }
 
 class TextStyle {
-    contsructor(primaryColor, secondaryColor, fontName, fontSize) {
+    constructor(primaryColor, secondaryColor, fontName, fontSize) {
         this.primaryColor = primaryColor;
         this.secondaryColor = secondaryColor;
         this.fontName = fontName;
