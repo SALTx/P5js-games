@@ -18,7 +18,7 @@ function setup() {
 
   // initialize buttons
   buttonArray.push(new Button(100, 100, 100, 50, "Button 1", saySomething));
-  buttonArray.push(new Button(100, 160, 100, 50, "Button 2", saySomething));
+  buttonArray.push(new Button(100, 160, 100, 50, "Button 2"));
 }
 
 //! Draw

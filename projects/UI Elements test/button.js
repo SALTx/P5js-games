@@ -1,8 +1,11 @@
 // class button
 // REQUIRES: ui-styles.js
 // NB: This class assumes that text is rendered CENTER, CENTER
+
+//! Button class
 class Button {
-    constructor(x, y, width, height, txt, callback) {
+    // Constructor
+    constructor(x, y, width, height, txt, callback = () => { alert(`${txt} button has been pressed`)}) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -37,6 +40,7 @@ class Button {
         return xOverlap && yOverlap;
     }
 
+    // The main function that draws the button
     render() {
         // set the fill color
         if(this.isHover()) {
@@ -56,6 +60,9 @@ class Button {
         text(this.txt, this.x + (this.width / 2), this.y + (this.height / 2));
     }
 
+    // The function to call when the button is clicked
+    // TODO: There is a potential problem if 2 buttons are rendered on top of each other. Both events will trigger simultaneously
+    // TODO: I want to test what order it happens in, its most likely going to be whichever button comes earlier in the array has its event take place
     onClick() {
         if(this.isHover()) {
             this.callback();
