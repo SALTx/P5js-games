@@ -5,7 +5,7 @@
 //! Button class
 class Button {
     // Constructor
-    constructor(x, y, width, height, txt, callback = () => { alert(`${txt} button has been pressed`)}) {
+    constructor(x, y, width, height, txt, callback = () => { alert(`${txt} button has been clicked`)}) {
         this.x = x;
         this.y = y;
         this.width = width;
@@ -15,6 +15,7 @@ class Button {
 
         // styles and stuffs
         this.style = new UIStyle(color(255, 0, 0), color(0, 255, 0));
+        this.strokeStyle = new StrokeStyle(color(0, 0, 0), color(0, 0, 0), 2);
         this.textStyle = new TextStyle(color(0), color(255), 'Arial', 24);
     }
 
@@ -49,6 +50,13 @@ class Button {
             fill(this.style.primaryColor); // Fill with primary color by default;
         }
 
+        // Set the stroke
+        if(this.strokeStyle.width <= 0) noStroke();
+        else {
+            stroke(this.strokeStyle.primaryColor);
+            strokeWeight(this.strokeStyle.width);
+        }
+
 
         // draw a rectangle
         rect(this.x, this.y, this.width, this.height);
@@ -57,6 +65,7 @@ class Button {
         fill(this.txt.primaryColor); // Set the fill color to text primary color
         // textFont(this.textStyle.fontName); // Broken
         textSize(this.textStyle.fontSize);
+        strokeWeight(1); // Text inherits stroke 
         text(this.txt, this.x + (this.width / 2), this.y + (this.height / 2));
     }
 

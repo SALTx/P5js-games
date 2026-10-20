@@ -8,6 +8,14 @@ class UIStyle {
     }
 }
 
+class StrokeStyle {
+    constructor(primaryColor, secondaryColor, width) {
+        this.primaryColor = primaryColor;
+        this.secondaryColor = secondaryColor;
+        this.width = width;
+    }
+}
+
 class TextStyle {
     contsructor(primaryColor, secondaryColor, fontName, fontSize) {
         this.primaryColor = primaryColor;
