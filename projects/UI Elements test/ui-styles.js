@@ -16,13 +16,3 @@ class TextStyle {
         this.fontSize = fontSize;
     }
 }
-
-
-// Global defaults
-let defaultUIStyle;
-let defaultTextStyle;
-
-function initializeDefaults() {
-    defaultUIStyle = new UIStyle(color(255, 0, 0), color(0, 255, 0));
-    defaultTextStyle = new TextStyle(color(0, 0, 0), color(255, 255, 255), 'Arial', 24);
-}

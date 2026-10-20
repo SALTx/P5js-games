@@ -1,6 +1,5 @@
-
-
 // class button
+// REQUIRES: ui-styles.js
 // NB: This class assumes that text is rendered CENTER, CENTER
 class Button {
     constructor(x, y, width, height, txt, callback) {
@@ -10,6 +9,17 @@ class Button {
         this.height = height;
         this.txt = txt;
         this.callback = callback;
+
+        // styles and stuffs
+        this.style = new UIStyle(color(255, 0, 0), color(0, 255, 0));
+        this.textStyle = new TextStyle(color(0), color(255), 'Arial', 24);
+    }
+
+    // static function to render buttons of an array
+    static renderAllButtons(arr) {
+        for(let button of arr) {
+            button.render();
+        }
     }
 
     // helper function to check of the mouse is on top of the button
@@ -23,9 +33,9 @@ class Button {
     render() {
         // set the fill color
         if(this.isHover()) {
-            fill(0, 255, 0); // Fill with a green color
+            fill(this.style.secondaryColor); // Fill with the secondary color if hovered
         } else {
-            fill(255, 0, 0); // Fill with a red color
+            fill(this.style.primaryColor); // Fill with primary color by default;
         }
 
 
@@ -33,7 +43,9 @@ class Button {
         rect(this.x, this.y, this.width, this.height);
 
         // draw the text on the button
-        fill(0); // Set the fill color to black
+        fill(this.txt.primaryColor); // Set the fill color to text primary color
+        // textFont(this.textStyle.fontName); // Broken
+        textSize(this.textStyle.fontSize);
         text(this.txt, this.x + (this.width / 2), this.y + (this.height / 2));
     }
 

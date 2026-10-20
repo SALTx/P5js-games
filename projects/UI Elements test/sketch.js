@@ -5,11 +5,8 @@ function saySomething() {
 
 
 // new buttons array
-let buttonArray = [
-  new Button(100, 100, 100, 50, "Button 1", saySomething),
-  new Button(100, 170, 100, 50, "Button 2", saySomething),
-  new Button(100, 240, 100, 50, "Button 3", saySomething),
-]
+let buttonArray = [] // empty array, initialized in the init function 
+
 
 // function to draw all buttons from the array
 function drawAllButtons() {
@@ -32,6 +29,10 @@ function setup() {
 
   // configure text
   textAlign(CENTER, CENTER);
+
+  // initialize buttons
+  buttonArray.push(new Button(100, 100, 100, 50, "Button 1", saySomething));
+  buttonArray.push(new Button(100, 160, 100, 50, "Button 2", saySomething));
 }
 
 //! Draw
