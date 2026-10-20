@@ -22,6 +22,13 @@ class Button {
         }
     }
 
+    // static function to handle all the clicks of the buttons in an array
+    static handleButtonClicks(arr) {
+        for(let button of arr) {
+            button.onClick();
+        }
+    }
+
     // helper function to check of the mouse is on top of the button
     isHover() {
         let xOverlap = mouseX > this.x && mouseX < this.x + this.width;

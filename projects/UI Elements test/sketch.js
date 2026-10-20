@@ -8,20 +8,6 @@ function saySomething() {
 let buttonArray = [] // empty array, initialized in the init function 
 
 
-// function to draw all buttons from the array
-function drawAllButtons() {
-  for(let button of buttonArray) {
-    button.render();
-  }
-}
-
-// function to handle all the clicks 
-function handleButtonClicks() {
-  for(let button of buttonArray) {
-    button.onClick();
-  }
-}
-
 //! Setup
 function setup() {
   createCanvas(400, 400);
@@ -37,11 +23,11 @@ function setup() {
 
 //! Draw
 function draw() {
-  drawAllButtons();
+  Button.renderAllButtons(buttonArray);
 }
 
 
 //! Mouse clicked
 function mouseClicked() {
-  handleButtonClicks();
+  Button.handleButtonClicks(buttonArray);
 }
