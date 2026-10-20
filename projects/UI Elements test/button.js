@@ -1,12 +1,14 @@
 
 
 // class button
+// NB: This class assumes that text is rendered CENTER, CENTER
 class Button {
-    constructor(x, y, width, height, callback) {
+    constructor(x, y, width, height, txt, callback) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.txt = txt;
         this.callback = callback;
     }
 
@@ -29,6 +31,10 @@ class Button {
 
         // draw a rectangle
         rect(this.x, this.y, this.width, this.height);
+
+        // draw the text on the button
+        fill(0); // Set the fill color to black
+        text(this.txt, this.x + (this.width / 2), this.y + (this.height / 2));
     }
 
     onClick() {
