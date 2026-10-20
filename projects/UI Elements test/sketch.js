@@ -1,12 +1,31 @@
 // alert
 function saySomething() {
-  alert("RAHHHHHH");
+  alert("Thats not what I said");
 }
 
-// my button
-let myFirstButton = new Button(200, 200, 100, 50, "RAHH", saySomething);
 
+// new buttons array
+let buttonArray = [
+  new Button(100, 100, 100, 50, "Button 1", saySomething),
+  new Button(100, 170, 100, 50, "Button 2", saySomething),
+  new Button(100, 240, 100, 50, "Button 3", saySomething),
+]
 
+// function to draw all buttons from the array
+function drawAllButtons() {
+  for(let button of buttonArray) {
+    button.render();
+  }
+}
+
+// function to handle all the clicks 
+function handleButtonClicks() {
+  for(let button of buttonArray) {
+    button.onClick();
+  }
+}
+
+//! Setup
 function setup() {
   createCanvas(400, 400);
   background(220);
@@ -15,10 +34,13 @@ function setup() {
   textAlign(CENTER, CENTER);
 }
 
+//! Draw
 function draw() {
-  myFirstButton.render();
+  drawAllButtons();
 }
 
+
+//! Mouse clicked
 function mouseClicked() {
-  myFirstButton.onClick();
+  handleButtonClicks();
 }
