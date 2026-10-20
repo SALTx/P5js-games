@@ -9,10 +9,10 @@ class UIStyle {
 }
 
 class StrokeStyle {
-    constructor(primaryColor, secondaryColor, width) {
+    constructor(primaryColor, secondaryColor, weight) {
         this.primaryColor = primaryColor;
         this.secondaryColor = secondaryColor;
-        this.width = width;
+        this.weight = weight;
     }
 }
 

@@ -20,7 +20,7 @@ class ProgressBar {
         this.strokeStyle = new StrokeStyle(
             [59, 15, 57],   // primary color [purple-ish]
             [0, 0, 0],      // secondary color [black]
-            2,  // stroke weight [2px]
+            7,  // stroke weight [7px]
         );
     }
 
