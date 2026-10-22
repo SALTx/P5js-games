@@ -15,6 +15,20 @@ class Checkbox {
         this.height = 50;
     }
 
+    // Static functions to render all the checkboxes inside a containing array
+    static renderAllCheckboxes(arr) {
+        for(let checkbox of arr) {
+            checkbox.render();
+        }
+    }
+
+    // Static function to handle all the clicks of the chcekboxes in an array
+    static handleCheckboxClicks(arr) {
+        for(let checkbox of arr) {
+            checkbox.onClick();
+        }
+    }
+
     // Helper function to see if the mouse is over the checkbox
     isHover() {
         let xOverlap = (mouseX > this.x) && (mouseX < (this.x + this.width));
