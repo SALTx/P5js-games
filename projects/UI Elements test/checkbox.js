@@ -39,4 +39,10 @@ class Checkbox {
             rect(this.x, this.y, this.width, this.height);
         }
     }
+
+    onClick() {
+        if(this.isHover()) {
+            this.enabled = !this.enabled;
+        }
+    }
 }
