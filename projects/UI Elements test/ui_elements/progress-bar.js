@@ -40,9 +40,13 @@ class ProgressBar {
     // The main function that draws the progress bar
     render() {
         // Set the stroke
-        stroke(this.strokeStyle.primaryColor);
-        if(this.strokeStyle.weight <= 0) noStroke();
-        else { strokeWeight(this.strokeStyle.weight); }
+        // TODO: Remove this part, I decided to get rid of the stroke in favoru of the backgroudn rect acting as the stroke
+        // stroke(this.strokeStyle.primaryColor);
+        // if(this.strokeStyle.weight <= 0) noStroke();
+        // else { strokeWeight(this.strokeStyle.weight); }
+
+        // Reset stroke 
+        noStroke();
 
         // draw the background
         fill(this.style.secondaryColor);
@@ -51,9 +55,16 @@ class ProgressBar {
         // clear the stroke for the bar
         noStroke();
 
+        // Calculations for the coordinates for foreground bar
+        let value; // <-- requires a pointer to reference
+
+        const maxWidth = this.width - this.strokeStyle.weight;
+        let fX = this.x + this.strokeStyle.weight / 2;
+        let fY = this.y + this.strokeStyle.weight / 2;
+
         // draw the foreground bar
         fill(this.style.primaryColor);
-        rect(this.x, this.y, this.width / 2, this.height);
+        rect(fX, fY, this.width / 2, this.height);
     }
 
 }
