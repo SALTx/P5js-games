@@ -1,6 +1,6 @@
 // class button
 // REQUIRES: ui-styles.js
-// NB: This class assumes that text is rendered CENTER, CENTER
+// NB: Handles the caller's rectMode automatically; text alignment is forced to CENTER, CENTER while rendering
 
 //! Button class
 class Button {
@@ -35,17 +35,47 @@ class Button {
     }
 
     // helper function to check of the mouse is on top of the button
+    // Converts x, y, width, height as interpreted by the current rectMode into a top-left based box
+    getBounds() {
+        // Use the mode from the last render so click events (fired outside draw) match what was drawn
+        switch (this.renderRectMode ?? rectMode()) {
+            case CENTER:
+                return { left: this.x - this.width / 2, top: this.y - this.height / 2, w: this.width, h: this.height };
+            case RADIUS: // width/height are half-extents
+                return { left: this.x - this.width, top: this.y - this.height, w: this.width * 2, h: this.height * 2 };
+            case CORNERS: // width/height are the opposite corner's x2/y2
+                return {
+                    left: min(this.x, this.width), top: min(this.y, this.height),
+                    w: abs(this.width - this.x), h: abs(this.height - this.y)
+                };
+            case CORNER:
+            default:
+                return { left: this.x, top: this.y, w: this.width, h: this.height };
+        }
+    }
+
     isHover() {
-        let xOverlap = mouseX > this.x && mouseX < this.x + this.width;
-        let yOverlap = mouseY > this.y && mouseY < this.y + this.height;
+        const b = this.getBounds();
+        let xOverlap = mouseX > b.left && mouseX < b.left + b.w;
+        let yOverlap = mouseY > b.top && mouseY < b.top + b.h;
 
         return xOverlap && yOverlap;
     }
 
     // The main function that draws the button
     render() {
+        // Resolve the bounds (and hover state) before changing any modes
+        this.renderRectMode = rectMode();
+        const b = this.getBounds();
+        const hovered = this.isHover();
+
+        // Isolate our rect/text modes so the caller's settings are untouched
+        push();
+        rectMode(CORNER);
+        textAlign(CENTER, CENTER);
+
         // set the fill color
-        if(this.isHover()) {
+        if(hovered) {
             fill(this.style.secondaryColor); // Fill with the secondary color if hovered
         } else {
             fill(this.style.primaryColor); // Fill with primary color by default;
@@ -60,14 +90,16 @@ class Button {
 
 
         // draw a rectangle
-        rect(this.x, this.y, this.width, this.height);
+        rect(b.left, b.top, b.w, b.h);
 
         // draw the text on the button
         fill(this.textStyle.primaryColor); // Set the fill color to text primary color
         textFont(this.textStyle.fontName); // Broken
         textSize(this.textStyle.fontSize);
         strokeWeight(1); // Text inherits stroke 
-        text(this.txt, this.x + (this.width / 2), this.y + (this.height / 2));
+        text(this.txt, b.left + b.w / 2, b.top + b.h / 2);
+
+        pop();
     }
 
     // The function to call when the button is clicked

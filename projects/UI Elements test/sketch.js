@@ -5,6 +5,10 @@ let buttonArray = [] // empty array, initialized in the init function
 let progressBarArray = []; // empty array, initialized in the init function 
 let checkboxArray = [] // empty array, initialized inside the init function 
 
+//! Test variables
+let firstButton = new Button(100, 100, 100, 50, "Test 1");
+let secondButton = new Button(300, 160, 100, 50, "Test 2");
+
 //! Setup
 function setup() {
   // Configure the canvas
@@ -33,14 +37,11 @@ function setup() {
 function draw() {
   background(220); // reset the backgroudn every frame
 
-  // Calls the static function inside the button class to render all the buttons in an array
-  // Button.renderAllButtons(buttonArray);
+  rectMode(CORNER);
+  firstButton.render();
 
-  // Calls the static function inside progress bar class to render all the progress bars
-  // ProgressBar.renderAllProgressBars(progressBarArray);
-
-  // Calls the static function inside checkbox class to render all the checkboxes
-  Checkbox.renderAllCheckboxes(checkboxArray);
+  rectMode(CENTER);
+  secondButton.render();
 }
 
 
@@ -49,6 +50,6 @@ function mouseClicked() {
   // Calls the static function inside the button class to handle when the buttons in an array are clicked
   // Button.handleButtonClicks(buttonArray);
 
-  // Calls the static function inside the checkbox class to handle all the mouse clicks
-  Checkbox.handleCheckboxClicks(checkboxArray);
+  firstButton.onClick();
+  secondButton.onClick();
 }
