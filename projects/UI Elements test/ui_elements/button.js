@@ -13,11 +13,24 @@ class Button {
         this.txt = txt;
         this.callback = callback;
 
-        // styles and stuffs
-        // Plain RGB arrays are used because color() isn't available before p5's setup()
-        this.style = new UIStyle([70, 130, 220], [100, 160, 245]);
-        this.strokeStyle = new StrokeStyle([30, 60, 120], [30, 60, 120], 2);
-        this.textStyle = new TextStyle([255, 255, 255], [255, 255, 255], 'Arial', 18);
+        // Default colors
+        this.style = new UIStyle(
+            // Primary color 
+            [37, 99, 235], 
+            // Secondary color - On hover
+            [29, 78, 216]
+        );
+
+        // Default stroke settings
+        this.strokeStyle = new StrokeStyle([0, 0, 0], [0, 0, 0], 1);
+        
+        // Default text style
+        this.textStyle = new TextStyle(
+            [255, 255, 255], 
+            [255, 255, 255], 
+            'Arial', 
+            18
+        );
     }
 
     // static function to render buttons of an array
