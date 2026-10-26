@@ -13,6 +13,19 @@ class Checkbox {
         // consts
         this.width = 50;
         this.height = 50;
+
+        // Default styles
+        this.style = new UIStyle(
+            [0, 255, 0], // Primary color - Color when selected
+            [255, 255, 255], // Secondary color - Color when unselected
+        )
+
+        // Default stroke style
+        this.strokeStyle = new StrokeStyle(
+            [0, 0, 0], // primary color - default stroke
+            [0, 0, 0], // Secondary color - unused for now,
+            3, // Stroke weight, default 3px
+        );
     }
 
     // Static functions to render all the checkboxes inside a containing array
@@ -38,20 +51,21 @@ class Checkbox {
     }
 
     render() {
+        // Background
+        noStroke();
+        fill(this.strokeStyle.primaryColor);
+        rect(this.x, this.y, this.width, this.height);
+
         // Set the style 
-        fill(255, 255, 255);
-        stroke(0, 0, 0)
-        strokeWeight(2);
+        fill(this.style.secondaryColor);
+        if(this.enabled) fill(this.style.primaryColor);
+        rect(this.x, this.y, this.width, this.height);
 
-        // Draw the background square
-        rect(this.x, this.y, 50, 50);
-
-        // If the checkbox is checked then draw the overlaying smaller square
-        if(this.enabled) {
-            fill(0, 255, 0);
-            // TODO: its supposed to be smaller and centered, but ill do the math later
-            rect(this.x, this.y, this.width, this.height);
-        }
+        // outline
+        stroke(this.strokeStyle.primaryColor);
+        strokeWeight(this.strokeStyle.weight);
+        noFill();
+        rect(this.x, this.y, this.width, this.height);
     }
 
     onClick() {
