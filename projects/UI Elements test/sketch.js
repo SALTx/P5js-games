@@ -6,8 +6,8 @@ let progressBarArray = []; // empty array, initialized in the init function
 let checkboxArray = [] // empty array, initialized inside the init function 
 
 //! Test variables
-let myFirstSlider = new Slider(100, 100, 150, 50);
-let mySecondSlider = new Slider(100, 200, 150, 50);
+let myFirstSlider = new Slider(50, 100, 150, 50);
+let mySecondSlider = new Slider(150, 200, 150, 50);
 
 //! Setup
 function setup() {

@@ -21,12 +21,12 @@ class Slider {
 
     // helper function to select the current slider (Under MousePressed)
     select() {
-        if(Slider.selectedSlider != this) {
+        if(Slider.selectedSlider == null) {
             let xOverlap = mouseX > this.x && mouseX < (this.x + this.width);
             let yOverlap = mouseY > this.y && mouseY < (this.y + this.height);
 
             if(xOverlap && yOverlap) Slider.selectedSlider = this;
-        } else {
+        } else if(Slider.selectedSlider == this) {
             this.completion = (mouseX - this.x) / this.width;
         }
 
@@ -51,6 +51,8 @@ class Slider {
 
         if(mouseIsPressed) {
             this.select();
+        } else {
+            if(Slider.selectedSlider == this) Slider.selectedSlider = null;
         }
     }
 }
