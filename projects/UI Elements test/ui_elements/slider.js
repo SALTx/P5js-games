@@ -36,14 +36,6 @@ class Slider {
     }
 
 
-    update() {
-        // The update logic that should happen every frame
-
-        // primitive way to coerce the value to between 0 and 1
-        if(this.completion < 0) this.completion = 0;
-        if(this.completion > 1) this.completion = 1;
-    }
-
     render() {
 
 
@@ -54,6 +46,10 @@ class Slider {
 
         // Slider value
         fill(255, 0, 0); // TODO: using red right now just to test
+        
+        // for debugging, if this is selected, change the slider fill to green
+        if(Slider.selectedSlider == this) fill(0, 255, 0);
+        
         rect(this.x, this.y, this.width * this.completion, this.height);
 
     }

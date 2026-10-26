@@ -7,6 +7,7 @@ let checkboxArray = [] // empty array, initialized inside the init function
 
 //! Test variables
 let myFirstSlider = new Slider(100, 100, 150, 50);
+let mySecondSlider = new Slider(100, 200, 150, 50);
 
 //! Setup
 function setup() {
@@ -36,8 +37,9 @@ function setup() {
 function draw() {
   background(220); // reset the backgroudn every frame
 
-  // Draw the slider
+  // Draw the sliders
   myFirstSlider.render();
+  mySecondSlider.render();
   
 }
 
@@ -49,5 +51,7 @@ function mouseClicked() {
 
 //! Mouse pressed
 function mousePressed() {
+  // The mousepressed functions for the sliders
   myFirstSlider.select();
+  mySecondSlider.select();
 }
