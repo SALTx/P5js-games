@@ -6,8 +6,7 @@ let progressBarArray = []; // empty array, initialized in the init function
 let checkboxArray = [] // empty array, initialized inside the init function 
 
 //! Test variables
-let firstButton = new Button(100, 100, 100, 50, "Test 1");
-let secondButton = new Button(300, 160, 100, 50, "Test 2");
+let myFirstSlider = new Slider(100, 100, 150, 50);
 
 //! Setup
 function setup() {
@@ -37,19 +36,18 @@ function setup() {
 function draw() {
   background(220); // reset the backgroudn every frame
 
-  rectMode(CORNER);
-  firstButton.render();
-
-  rectMode(CENTER);
-  secondButton.render();
+  // Draw the slider
+  myFirstSlider.render();
+  
 }
 
 
 //! Mouse clicked
 function mouseClicked() {
-  // Calls the static function inside the button class to handle when the buttons in an array are clicked
-  // Button.handleButtonClicks(buttonArray);
 
-  firstButton.onClick();
-  secondButton.onClick();
+}
+
+//! Mouse pressed
+function mousePressed() {
+  myFirstSlider.select();
 }
