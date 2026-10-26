@@ -39,29 +39,11 @@ function draw() {
 
   // Draw the sliders
   myFirstSlider.render();
-  mySecondSlider.render();
-
-
-
-  //! Mouse is Pressed check
-  if(mouseIsPressed) {
-    myFirstSlider.select();
-    mySecondSlider.select();
-  }
-  
+  mySecondSlider.render();  
 }
 
 
 //! Mouse clicked
 function mouseClicked() {
 
-}
-
-//! Mouse pressed
-function mousePressed() {
-  // The mousepressed functions for the sliders
-  // myFirstSlider.select();
-  // mySecondSlider.select();
-
-  console.log("mouse pressed is being called\n");
 }

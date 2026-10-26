@@ -28,7 +28,6 @@ class Slider {
             if(xOverlap && yOverlap) Slider.selectedSlider = this;
         } else {
             this.completion = (mouseX - this.x) / this.width;
-            console.log("This is being calculated");
         }
 
         // coerce completion value
@@ -38,9 +37,6 @@ class Slider {
 
 
     render() {
-
-
-
         // background rectangle
         fill(0, 0, 0); // Black fill for the background
         rect(this.x, this.y, this.width, this.height);
@@ -53,5 +49,8 @@ class Slider {
         
         rect(this.x, this.y, this.width * this.completion, this.height);
 
+        if(mouseIsPressed) {
+            this.select();
+        }
     }
 }
