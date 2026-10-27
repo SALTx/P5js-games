@@ -33,6 +33,9 @@ class Button {
         );
     }
 
+    // Static, superior ownership
+    static highestButton = null;    // Will contain the button that is last rendered (aka. higher on the z axis) 
+
     // static function to render buttons of an array
     static renderAllButtons(arr) {
         for(let button of arr) {
@@ -90,8 +93,10 @@ class Button {
         // set the fill color
         if(hovered) {
             fill(this.style.secondaryColor); // Fill with the secondary color if hovered
+            if(Button.highestButton == null) Button.highestButton = this;
         } else {
             fill(this.style.primaryColor); // Fill with primary color by default;
+            if(Button.highestButton == this) Button.highestButton = null;
         }
 
         // Set the stroke
@@ -119,7 +124,7 @@ class Button {
     // TODO: There is a potential problem if 2 buttons are rendered on top of each other. Both events will trigger simultaneously
     // TODO: I want to test what order it happens in, its most likely going to be whichever button comes earlier in the array has its event take place
     onClick() {
-        if(this.isHover()) {
+        if(this.isHover() && (Button.highestButton == this)) {
             this.callback();
         }
     }
