@@ -5,9 +5,9 @@ let buttonArray = [] // empty array, initialized in the init function
 let progressBarArray = []; // empty array, initialized in the init function 
 let checkboxArray = [] // empty array, initialized inside the init function 
 
-//! Test variables
-let myFirstSlider = new Slider(50, 100, 150, 50);
-let mySecondSlider = new Slider(150, 200, 150, 50);
+// Creating a test textbox
+let myTextBox = new TextBox(200, 200, 200, 200, "");
+
 
 //! Setup
 function setup() {
@@ -18,32 +18,28 @@ function setup() {
   // configure text to be rendered in the center
   textAlign(CENTER, CENTER);
 
-  //* initialize buttons
-  buttonArray.push(new Button(100, 100, 100, 50, "Button 1"));
-  buttonArray.push(new Button(100, 160, 100, 50, "Button 2"));
-
-  //* initialize progress bar
-  progressBarArray.push(new ProgressBar(100, 100, 100, 50));
-
-  //* initialize checkboxes
-  checkboxArray.push(new Checkbox(100, 100, false));
-  checkboxArray.push(new Checkbox(200, 100, false));
-  checkboxArray.push(new Checkbox(200, 200, false));
-  checkboxArray.push(new Checkbox(100, 200, false));
-
+  // Testing buttons and what happens if two are on top of each other
+  buttonArray.push(
+    new Button(100, 100, 100, 50, "Miggo"),
+    new Button(150, 125, 100, 50, "burgo"),
+  )
 }
 
 //! Draw
 function draw() {
-  background(220); // reset the backgroudn every frame
+  background(220); // reset the background every frame
 
-  // Draw the sliders
-  myFirstSlider.render();
-  mySecondSlider.render();  
+  // Draw the buttons
+  Button.renderAllButtons(buttonArray);
+
+  // Render the testing text box
+  myTextBox.render();
 }
 
 
-//! Mouse clicked
+//! Mouse clicked 
 function mouseClicked() {
 
+  // Handle the clicks for the buttons
+  Button.handleButtonClicks(buttonArray); 
 }
