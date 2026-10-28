@@ -2,7 +2,7 @@
 
 class Fella {
     // Just an x and y for now for where the fella spawns on the canvas
-    consructor(x, y) {
+    constructor(x = 200, y = 200) {
         this.x = x;
         this.y = y;
 
@@ -25,6 +25,7 @@ class Fella {
 
 
         // Just a small ellipse for now, might replace with a cute sprite soon
+        fill(255, 0, 0);
         ellipse(this.x, this.y, 50, 50);
     }
 }

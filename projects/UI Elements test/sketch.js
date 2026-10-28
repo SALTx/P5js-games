@@ -5,9 +5,8 @@ let buttonArray = [] // empty array, initialized in the init function
 let progressBarArray = []; // empty array, initialized in the init function 
 let checkboxArray = [] // empty array, initialized inside the init function 
 
-// Creating a test textbox
-let myTextBox = new TextBox(200, 200, 200, 200, "");
-
+// Testing my fella
+let myFella = new Fella(200, 200);
 
 //! Setup
 function setup() {
@@ -23,23 +22,18 @@ function setup() {
     new Button(100, 100, 100, 50, "Miggo"),
     new Button(150, 125, 100, 50, "burgo"),
   )
+
 }
 
 //! Draw
 function draw() {
   background(220); // reset the background every frame
 
-  // Draw the buttons
-  Button.renderAllButtons(buttonArray);
-
-  // Render the testing text box
-  myTextBox.render();
+  myFella.render();
 }
 
 
 //! Mouse clicked 
 function mouseClicked() {
 
-  // Handle the clicks for the buttons
-  Button.handleButtonClicks(buttonArray); 
 }
