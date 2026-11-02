@@ -1,6 +1,6 @@
 
 
-// Array containing the buttons
+// Containers for the UI elements
 let buttonArray = [] // empty array, initialized in the init function
 let progressBarArray = []; // empty array, initialized in the init function 
 let checkboxArray = [] // empty array, initialized inside the init function 
@@ -16,13 +16,6 @@ function setup() {
 
   // configure text to be rendered in the center
   textAlign(CENTER, CENTER);
-
-  // Testing buttons and what happens if two are on top of each other
-  buttonArray.push(
-    new Button(100, 100, 100, 50, "Miggo"),
-    new Button(150, 125, 100, 50, "burgo"),
-  )
-
 }
 
 //! Draw
