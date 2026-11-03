@@ -20,8 +20,8 @@ class Fire {
 
         // calculate some values
         // TODO: Change it to dynamically calculate based on the width of the canvas and the fire object
-        const cols = 10;
-        const rows = 10;
+        const cols = width / Fire.width;
+        const rows = height / Fire.height;
 
         // create an array containing an individual row
         // let pushArray = [];
@@ -38,17 +38,31 @@ class Fire {
         let pushArray = [];
         for(let i = 0; i < rows; ++i) {
             for(let j = 0; j < cols; ++j) {
-                pushArray.push(new Fire(200 + j * Fire.width, 200 + i * Fire.height, Math.random())); // defaults to a random temperature
+                pushArray.push(new Fire(0 + j * Fire.width, height - i * Fire.height, Math.random())); // defaults to a random temperature
             }
             Fire.fireArray.push(pushArray);
             pushArray = [];
         }
     }
 
+    // Draws the actual fire
     static drawFire() {
         for (let row of Fire.fireArray) {
             for (let fire of row) {
                 fire.render();
+            }
+        }
+    }
+
+    // Update all the rows
+    static updateFire() {
+        // Start at row 1: row 0 has no previous row, so it acts as the heat source
+        for(let i = 1; i < Fire.fireArray.length; ++i) {
+            const row = Fire.fireArray[i];
+            const prevRow = Fire.fireArray[i - 1];
+            for(let j = 0; j < row.length; ++j) {
+                // Take the temperature of the fire at the same position in the previous row, minus a random decay
+                row[j].temperature = Math.max(0, prevRow[j].temperature - Math.random() * 0.1);
             }
         }
     }
@@ -63,7 +77,7 @@ class Fire {
 
     render() {
         // fill
-        fill(this.hue);
+        fill(this.hue.map(hue => hue * this.temperature));
         rect(this.x, this.y, Fire.width, Fire.height);
     }
 }
