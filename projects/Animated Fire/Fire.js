@@ -23,17 +23,34 @@ class Fire {
         const cols = 10;
         const rows = 10;
 
-        // Push the base row of the fire
+        // create an array containing an individual row
+        // let pushArray = [];
+        // for(let i = 0; i < cols; i++) {
+        //     pushArray.push(new Fire(200, 200)); // Temperature defaults to 1
+        // }
+        
+        // // Push all the rows into the array
+        // for(let i = 0; i < rows; i++) {
+        //     Fire.fireArray.push(pushArray);
+        // }
 
+        // Improved version
         let pushArray = [];
-        for(let i = 0; i < cols; i++) {
-            pushArray.push(new Fire(200, 200)); // Temperature defaults to 1
+        for(let i = 0; i < rows; ++i) {
+            for(let j = 0; j < cols; ++j) {
+                pushArray.push(new Fire(200 + j * Fire.width, 200 + i * Fire.height, Math.random())); // defaults to a random temperature
+            }
+            Fire.fireArray.push(pushArray);
+            pushArray = [];
         }
-        this.fireArray.push(pushArray);
     }
 
     static drawFire() {
-        
+        for (let row of Fire.fireArray) {
+            for (let fire of row) {
+                fire.render();
+            }
+        }
     }
 
     update() {
