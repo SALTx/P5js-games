@@ -63,7 +63,7 @@ class Fire {
     // Update all the rows
     static updateFire() {
         // wind constant
-        const wind = 0.2;
+        const windOffset = 1;
 
         // Start at row 1: row 0 has no previous row, so it acts as the heat source
         for(let i = 1; i < Fire.fireArray.length; ++i) {
@@ -71,7 +71,11 @@ class Fire {
             const prevRow = Fire.fireArray[i - 1];
             for(let j = 0; j < row.length; ++j) {
                 // Take the temperature of the fire at the same position in the previous row, minus a random decay
-                row[j].temperature = Math.max(0, prevRow[j].temperature - Math.random() * 0.05);
+                if(j <= windOffset) {
+                    row[j].temperature = Math.max(0, prevRow[j].temperature - Math.random() * 0.05);
+                } else {
+                    row[j].temperature = Math.max(0, prevRow[j - windOffset].temperature - Math.random() * 0.05);
+                }
             }
         }
     }
