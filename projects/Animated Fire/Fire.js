@@ -38,7 +38,13 @@ class Fire {
         let pushArray = [];
         for(let i = 0; i < rows; ++i) {
             for(let j = 0; j < cols; ++j) {
-                pushArray.push(new Fire(0 + j * Fire.width, height - i * Fire.height, Math.random())); // defaults to a random temperature
+                // for the first row it should all have a temperature of 1
+                if(i == 0) {
+                    pushArray.push(new Fire(0 + j * Fire.width, height - i * Fire.height, 1)); // sets the temperature to 1 for the base row
+                } else {
+                    pushArray.push(new Fire(0 + j * Fire.width, height - i * Fire.height, 0)); // Then the remaining values dont matter
+                }
+
             }
             Fire.fireArray.push(pushArray);
             pushArray = [];
@@ -56,13 +62,16 @@ class Fire {
 
     // Update all the rows
     static updateFire() {
+        // wind constant
+        const wind = 0.2;
+
         // Start at row 1: row 0 has no previous row, so it acts as the heat source
         for(let i = 1; i < Fire.fireArray.length; ++i) {
             const row = Fire.fireArray[i];
             const prevRow = Fire.fireArray[i - 1];
             for(let j = 0; j < row.length; ++j) {
                 // Take the temperature of the fire at the same position in the previous row, minus a random decay
-                row[j].temperature = Math.max(0, prevRow[j].temperature - Math.random() * 0.1);
+                row[j].temperature = Math.max(0, prevRow[j].temperature - Math.random() * 0.05);
             }
         }
     }
