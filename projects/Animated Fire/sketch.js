@@ -1,15 +1,23 @@
 function setup() {
+  // Set up canvas
   createCanvas(400, 400);
-  background(220);
+  background(0);
+
+  // Style settings
+  noStroke();
 
   // Initialize fire
   Fire.initializeArray();
 
-  // Debug, see whats in the array
-  console.log(Fire.fireArray);
 }
 
 function draw() {
+  // reset the background
+  background(0);
+
   // Draw the fire
   Fire.drawFire();
+
+  // Update the fire
+  Fire.updateFire();
 }
