@@ -12,20 +12,23 @@ class SpriteSheet {
         this.spriteHeight = this.height / this.rows;
     }
 
-}
+    // Static containers
+    static SpriteSheets = [];
 
-class Sprite {
-    constructor(spriteSheet, row, column) {
-        this.spriteSheet = spriteSheet;
-        this.row = row;
-        this.column = column;
+    // Static function to add a spritesheet to the container
+    static addSpriteSheet(path, spriteSheetName) {
+        // Check if the spriteSheet exists in the SpriteSheet container
+        if(SpriteSheet.SpriteSheets.find(spriteSheet => spriteSheet.name === spriteSheetName)) {
+            console.log("[SpriteSheet]: Attempting to add a sprite sheet that already exists");
+            return;
+        } else {
+            SpriteSheet.SpriteSheets.push({
+                name: spriteSheetName,
+                path: path,
+            })
+        }
     }
 
-
-    // Render the sprite with a given width and height
-    render(x, y, width, height) {
-
-    }
 }
 
 
