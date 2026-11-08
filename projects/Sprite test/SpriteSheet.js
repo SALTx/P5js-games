@@ -1,8 +1,9 @@
 //! Class Spritesheet
 class SpriteSheet {
-    constructor(filepath, width, height, rows, columns) {
-        this.filepath = filepath;
-        this.width = width;
+    // TODO: add gutter variable(s) 
+    constructor(file, width, height, rows, columns) {
+        this.file = file; // Holds the image pointer [Type: p5.Image]
+        this.width = width; // TODO: might be redundant since the image object might have these values stored 
         this.height = height;
         this.rows = rows;
         this.columns = columns;
@@ -27,6 +28,11 @@ class SpriteSheet {
                 path: path,
             })
         }
+    }
+
+    // Member functions
+    drawSprite(row, column, x, y, width, height) {
+        // Draws the given sprite from the sprite sheet at a provided coordinate with specified width and height
     }
 
 }
