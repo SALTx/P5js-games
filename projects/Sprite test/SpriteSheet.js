@@ -33,8 +33,17 @@ class SpriteSheet {
     // Member functions
     drawSprite(row, column, x, y, width, height) {
         // Draws the given sprite from the sprite sheet at a provided coordinate with specified width and height
+        image(
+            this.file,
+            x,
+            y,
+            width,
+            height,
+            column * this.spriteWidth,
+            row * this.spriteHeight,
+            this.spriteWidth,
+            this.spriteHeight
+        );
     }
 
 }
-
-
