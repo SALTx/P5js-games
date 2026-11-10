@@ -1,16 +1,14 @@
 //! Class Spritesheet
 class SpriteSheet {
     // TODO: add gutter variable(s) 
-    constructor(file, width, height, rows, columns) {
+    constructor(file, rows, columns) {
         this.file = file; // Holds the image pointer [Type: p5.Image]
-        this.width = width; // TODO: might be redundant since the image object might have these values stored 
-        this.height = height;
         this.rows = rows;
         this.columns = columns;
 
         // sprite details
-        this.spriteWidth = this.width / this.columns;
-        this.spriteHeight = this.height / this.rows;
+        this.spriteWidth = this.file.width / this.columns;
+        this.spriteHeight = this.file.height / this.rows;
     }
 
     // Static containers
