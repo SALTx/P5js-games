@@ -34,6 +34,20 @@ class SpriteSheet {
         })
     }
 
+    // static function to retrieve a spriteSheet from the container
+    static getSpriteSheet(spriteSheetName) {
+        let returnSpriteSheet = null;
+
+        SpriteSheet.SpriteSheets.forEach((spriteSheet) => {
+            if(spriteSheet.name === spriteSheetName) {
+                console.log("Successfully retrieved spritesheet by name " + spriteSheetName);
+                returnSpriteSheet = spriteSheet.spriteSheet;
+            }
+        })
+
+        return returnSpriteSheet;
+    }
+
     // Member functions
     drawSprite(row, column, x, y, width, height) {
         // Draws the given sprite from the sprite sheet at a provided coordinate with specified width and height
