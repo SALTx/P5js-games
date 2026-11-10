@@ -15,17 +15,23 @@ class SpriteSheet {
     static SpriteSheets = [];
 
     // Static function to add a spritesheet to the container
-    static addSpriteSheet(path, spriteSheetName) {
-        // Check if the spriteSheet exists in the SpriteSheet container
-        if(SpriteSheet.SpriteSheets.find(spriteSheet => spriteSheet.name === spriteSheetName)) {
-            console.log("[SpriteSheet]: Attempting to add a sprite sheet that already exists");
-            return;
-        } else {
-            SpriteSheet.SpriteSheets.push({
-                name: spriteSheetName,
-                path: path,
-            })
-        }
+    static addSpriteSheet(spriteSheetName, spriteSheet) {
+        // Iterate over the array and check if the sprite is there
+        SpriteSheet.SpriteSheets.forEach((spriteSheet) => {
+            if(spriteSheet.name === spriteSheetName) {
+                console.log("[SpriteSheet]: Attempting to add a sprite sheet that already exists");
+                return spriteSheet.spriteSheet; // TODO: find a way to return the new sheet when it gets added to the container
+            } else {
+                // for debugging only
+                console.log(`[SpriteSheet]: Iterating through container (${spriteSheetName})`);
+            }
+        });
+
+        // If the sprite doesnt exist then add ot
+        SpriteSheet.SpriteSheets.push({
+            name: spriteSheetName,
+            spriteSheet: spriteSheet,
+        })
     }
 
     // Member functions
