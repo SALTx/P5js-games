@@ -14,7 +14,15 @@ class SpriteSheet {
     // Static container holding the spritesheets each with a unique name {name, spriteSheet}
     static SpriteSheets = [];
 
-    // A testing container for the animaions of each spriteSheet {name, animation, framecount} animation holds an array of row,cols and the length of said array is how many frames it has
+    // A testing container for the animaions of each spriteSheet. Holds the following object
+    /*
+    {
+        spriteSheet: // The sprite sheet to get the sprites from
+        name: // The name to uniquely identify the specific animation
+        animation: // the rows and columns where the sprites in the animations are (basically the animationFrames)
+        numFrames: // The number of frames that the animation should be running from before it repeats
+    }
+    */
     static SpriteSheetAnimations = [];
 
     // Static function to add a spritesheet to the container
@@ -40,6 +48,7 @@ class SpriteSheet {
     static addAnimation(spriteSheet, animationName, startingSprite, endingSprite, numFrames) {
         // The animation travels vertically
         let pushObject = {
+            spriteSheet: spriteSheet,
             name: animationName,
             animation:  [],
             numFrames:  numFrames,
