@@ -14,7 +14,7 @@ class SpriteSheet {
     // Static container holding the spritesheets each with a unique name {name, spriteSheet}
     static SpriteSheets = [];
 
-    // A testing container for the animaions of each spriteSheet {name, animation} animation holds an array of row,cols and the length of said array is how many frames it has
+    // A testing container for the animaions of each spriteSheet {name, animation, framecount} animation holds an array of row,cols and the length of said array is how many frames it has
     static SpriteSheetAnimations = [];
 
     // Static function to add a spritesheet to the container
@@ -37,16 +37,28 @@ class SpriteSheet {
         })
     }
 
-    static addAnimation(spriteSheet, startingSprite, endingSprite) {
+    static addAnimation(spriteSheet, animationName, startingSprite, endingSprite, numFrames) {
         // The animation travels vertically
+        let pushObject = {
+            name: animationName,
+            animation:  [],
+            numFrames:  numFrames,
+        }
+
         if(startingSprite[1] == endingSprite[1]) {
-
+            for(let i = startingSprite[0]; i < endingSprite[0]; i++) {
+                pushObject.animation.push([i, startingSprite[1]]);
+            }
         } else if(startingSprite[0] == endingSprite[0]) {
-
+            for(let i = startingSprite[1]; i < endingSprite[1]; i++) {
+                pushObject.animation.push([startingSprite[0], i]);
+            }
         } else {
             // The sprite is going diagonally which isnt supported yet
             console.log(`[SpriteSheet]: Attempting to add an animation that happens diagonally through a spritesheet`);
         }
+
+        SpriteSheet.SpriteSheets.push(pushObject);
     }
 
     // static function to retrieve a spriteSheet from the container
