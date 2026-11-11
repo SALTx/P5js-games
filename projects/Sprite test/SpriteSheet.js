@@ -11,8 +11,11 @@ class SpriteSheet {
         this.spriteHeight = this.file.height / this.rows;
     }
 
-    // Static containers
+    // Static container holding the spritesheets each with a unique name {name, spriteSheet}
     static SpriteSheets = [];
+
+    // A testing container for the animaions of each spriteSheet {name, animation} animation holds an array of row,cols and the length of said array is how many frames it has
+    static SpriteSheetAnimations = [];
 
     // Static function to add a spritesheet to the container
     static addSpriteSheet(spriteSheetName, spriteSheet) {
@@ -32,6 +35,18 @@ class SpriteSheet {
             name: spriteSheetName,
             spriteSheet: spriteSheet,
         })
+    }
+
+    static addAnimation(spriteSheet, startingSprite, endingSprite) {
+        // The animation travels vertically
+        if(startingSprite[1] == endingSprite[1]) {
+
+        } else if(startingSprite[0] == endingSprite[0]) {
+
+        } else {
+            // The sprite is going diagonally which isnt supported yet
+            console.log(`[SpriteSheet]: Attempting to add an animation that happens diagonally through a spritesheet`);
+        }
     }
 
     // static function to retrieve a spriteSheet from the container
