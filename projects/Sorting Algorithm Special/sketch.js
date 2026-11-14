@@ -1,3 +1,5 @@
+// Globals
+let isSorting = false;
 
 function setup() {
   createCanvas(400, 400).parent("canvas-container");
@@ -14,4 +16,8 @@ function draw() {
   background(220);
 
   Sort.renderArray();
+
+  if(isSorting) {
+    Sort.insertionSort();
+  }
 }
