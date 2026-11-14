@@ -55,11 +55,11 @@ class SpriteSheet {
         }
 
         if(startingSprite[1] == endingSprite[1]) {
-            for(let i = startingSprite[0]; i < endingSprite[0]; i++) {
+            for(let i = startingSprite[0]; i <= endingSprite[0]; i++) {
                 pushObject.animation.push([i, startingSprite[1]]);
             }
         } else if(startingSprite[0] == endingSprite[0]) {
-            for(let i = startingSprite[1]; i < endingSprite[1]; i++) {
+            for(let i = startingSprite[1]; i <= endingSprite[1]; i++) {
                 pushObject.animation.push([startingSprite[0], i]);
             }
         } else {
@@ -68,6 +68,8 @@ class SpriteSheet {
         }
 
         SpriteSheet.SpriteSheets.push(pushObject);
+        console.log("The Animation has been added");
+        console.log(pushObject);
     }
 
     // static function to retrieve a spriteSheet from the container
@@ -76,7 +78,6 @@ class SpriteSheet {
 
         SpriteSheet.SpriteSheets.forEach((spriteSheet) => {
             if(spriteSheet.name === spriteSheetName) {
-                console.log("Successfully retrieved spritesheet by name " + spriteSheetName);
                 returnSpriteSheet = spriteSheet.spriteSheet;
             }
         })
@@ -85,7 +86,7 @@ class SpriteSheet {
     }
 
     static drawAnimation(name, x, y, width, height, offset = 0) {
-        
+
     }
 
     // Member functions
