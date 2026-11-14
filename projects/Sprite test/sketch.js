@@ -27,11 +27,14 @@ async function setup() {
 function draw() {
   background(220); // Reset the background
 
-  // Draw bounding box to show where the sprite is actually being drawn
-  fill(255, 255, 0);
-  rect(100, 100, 100, 100);
+  // // Draw bounding box to show where the sprite is actually being drawn
+  // fill(255, 255, 0);
+  // rect(100, 100, 100, 100);
 
-  // Draw the first man animation
-  animationFrame++;
-  SpriteSheet.getSpriteSheet("man").drawSprite(0, animationFrame%13, 100, 100, 100, 100);
+  // // Draw the first man animation
+  // animationFrame++;
+  // SpriteSheet.getSpriteSheet("man").drawSprite(0, animationFrame%13, 100, 100, 100, 100);
+
+  SpriteSheet.drawAnimation("man_idle", 100, 100, 100, 100);
+  SpriteSheet.drawAnimation("man_walk", 300, 100, 100, 100);
 }
