@@ -6,7 +6,11 @@ class Sort {
     static array = [];
 
     // Populates the array with n number of elements
-    static populateArray(n) {
+    static populateArray(n = 10) {
+        // Clears the array before population
+        Sort.array = [];
+
+        // Fills the array with random values 
         for(let i = 0; i < n; i++) {
             Sort.array.push(Math.floor(Math.random()*height));
         }

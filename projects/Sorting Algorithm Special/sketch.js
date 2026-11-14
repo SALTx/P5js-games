@@ -10,5 +10,8 @@ function setup() {
 
 
 function draw() {
+  // Reset background
+  background(220);
+
   Sort.renderArray();
 }
