@@ -1,3 +1,6 @@
+// Globals
+const ANIMATION_FRAMES = 60;
+
 // Testing sprite sheets
 
 let animationFrame = 0;
@@ -15,6 +18,10 @@ async function setup() {
   // Add some sprite sheets to the SpriteSheet container
   SpriteSheet.addSpriteSheet("dungeon", new SpriteSheet(await loadImage('Resources/dungeon_tilemap.png'), 11, 12));
   SpriteSheet.addSpriteSheet("man", new SpriteSheet(await loadImage('Resources/man_animations.png'), 8, 13));
+
+  // Add the man animations to the container
+  SpriteSheet.addAnimation(SpriteSheet.getSpriteSheet("man"), "man_idle", [0, 0], [0, 12], ANIMATION_FRAMES);
+  SpriteSheet.addAnimation(SpriteSheet.getSpriteSheet("man"), "man_walk", [0, 0], [0, 7], ANIMATION_FRAMES);
 }
 
 function draw() {

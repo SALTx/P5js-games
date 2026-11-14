@@ -84,6 +84,10 @@ class SpriteSheet {
         return returnSpriteSheet;
     }
 
+    static drawAnimation(name, x, y, width, height, offset = 0) {
+        
+    }
+
     // Member functions
     drawSprite(row, column, x, y, width, height) {
         // Draws the given sprite from the sprite sheet at a provided coordinate with specified width and height
