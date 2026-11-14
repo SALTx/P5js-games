@@ -83,8 +83,25 @@ class SpriteSheet {
         return returnSpriteSheet;
     }
 
-    static drawAnimation(name, x, y, width, height, offset = 0) {
+    static getAnimation(animationName) {
+        let returnAnimation = null;
 
+        SpriteSheet.SpriteSheetAnimations.forEach((animation) => {
+            if(animation.name === animationName) {
+                returnAnimation = animation;
+            }
+        });
+
+        return returnAnimation;
+    }
+
+    static drawAnimation(name, x, y, width, height, offset = 0) {
+        const animation = SpriteSheet.getAnimation(name);
+
+        if(animation == null) {
+            console.log(`[SpriteSheet]: Error retrieving animation with name ${name}`);
+            return;
+        }
     }
 
     // Member functions
