@@ -7,7 +7,7 @@ class Sort {
     static step = 0; // The current step of the sortign process
 
     // Populates the array with n number of elements, also acts as a reset
-    static populateArray(n = 10) {
+    static populateArray(n = 75) {
         // Clears the array before population
         Sort.array = [];
 
@@ -26,11 +26,11 @@ class Sort {
 
 
         // Bar design
-        stroke(180, 180, 0);
-        fill(255, 255, 0);
+        noStroke();
 
         // Draw the bars
         for(let i = 0; i < Sort.array.length; i++) {
+            fill(255, Sort.array[i], 0);
             rect(i * barWidth, height, barWidth, -Sort.array[i])
         }
     }
