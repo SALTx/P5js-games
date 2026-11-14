@@ -50,7 +50,7 @@ class SpriteSheet {
         let pushObject = {
             spriteSheet: spriteSheet,
             name: animationName,
-            animation:  [],
+            animationFrames:  [],
             numFrames:  numFrames,
         }
 
@@ -60,7 +60,7 @@ class SpriteSheet {
             }
         } else if(startingSprite[0] == endingSprite[0]) {
             for(let i = startingSprite[1]; i <= endingSprite[1]; i++) {
-                pushObject.animation.push([startingSprite[0], i]);
+                pushObject.animationFrames.push([startingSprite[0], i]);
             }
         } else {
             // The sprite is going diagonally which isnt supported yet
@@ -96,12 +96,15 @@ class SpriteSheet {
     }
 
     static drawAnimation(name, x, y, width, height, offset = 0) {
+        // TODO: offset remains unused
         const animation = SpriteSheet.getAnimation(name);
 
         if(animation == null) {
             console.log(`[SpriteSheet]: Error retrieving animation with name ${name}`);
             return;
         }
+
+        animation.spriteSheet.drawSprite(animation.animationFrames[frameCount % animation.animationFrames.length], x, y, width, height);
     }
 
     // Member functions
@@ -115,6 +118,21 @@ class SpriteSheet {
             height,
             column * this.spriteWidth,
             row * this.spriteHeight,
+            this.spriteWidth,
+            this.spriteHeight
+        );
+    }
+
+    // Overloaded drawSprite that takes an array for row and column
+    drawSprite(frame, x, y, width, height) {
+        image(
+            this.file,
+            x,
+            y,
+            width,
+            height,
+            frame[1] * this.spriteWidth,
+            frame[0] * this.spriteHeight,
             this.spriteWidth,
             this.spriteHeight
         );
