@@ -67,9 +67,7 @@ class SpriteSheet {
             console.log(`[SpriteSheet]: Attempting to add an animation that happens diagonally through a spritesheet`);
         }
 
-        SpriteSheet.SpriteSheets.push(pushObject);
-        console.log("The Animation has been added");
-        console.log(pushObject);
+        SpriteSheet.SpriteSheetAnimations.push(pushObject);
     }
 
     // static function to retrieve a spriteSheet from the container
