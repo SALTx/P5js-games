@@ -1,9 +1,6 @@
 //! Sort class
-
 class Sort {
-    constructor() {
-
-    }
+    constructor() {}
 
     // Static values
     static array = [];
@@ -11,7 +8,7 @@ class Sort {
     // Populates the array with n number of elements
     static populateArray(n) {
         for(let i = 0; i < n; i++) {
-            Sort.array.push(Math.floor(Math.random()*100));
+            Sort.array.push(Math.floor(Math.random()*height));
         }
     }
 
