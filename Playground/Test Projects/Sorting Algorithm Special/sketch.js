@@ -2,6 +2,7 @@
 let isSorting = false;
 
 let oscillator; // Holds the oscillator object
+let frequency = 432; // the frequency the sound should play at
 let isPlaying = false; // Boolean that controls if the sound is playing
 
 function setup() {
@@ -13,6 +14,8 @@ function setup() {
 
   // Init oscillator
   oscillator = new p5.Oscillator();
+  oscillator.start();
+  isPlaying = true;
 
   // Populate the sort array with values
   Sort.populateArray();

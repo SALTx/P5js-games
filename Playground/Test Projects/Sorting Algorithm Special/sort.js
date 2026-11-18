@@ -53,6 +53,11 @@ class Sort {
             // Place 'current' into sorted position
             Sort.array[j+1] = current;
 
+            if(isPlaying) {
+                oscillator.freq(Sort.array[j+1], 0.1);
+                oscillator.amp(0.5);
+            }
+            
             // increment the step counter
             steps++;
 
