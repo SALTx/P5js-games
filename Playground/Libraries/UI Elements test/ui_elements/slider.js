@@ -1,83 +1,55 @@
 // class Slider
-// REQUIRES: ui-styles.js
-
+// REQUIRES: ui-styles.js, ui-element.js
 
 //! Slider class
-class Slider {
+// Read / write slider.value (between 0 and 1). onChange(value) fires while it is being dragged
+class Slider extends RangeElement {
     constructor(x, y, width, height, onChange = () => {}) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
+        super(x, y, width, height);
         this.onChange = onChange;
-
-        // Default styles
-        this.style = new UIStyle (
-            // Primary color - The color of the bar
-            [255, 0, 0], // Red by default
-            // Secondary color
-            [0, 255, 0], // Green when selected
-        )
-
-        // Default stroke
-        this.strokeStyle = new StrokeStyle (
-            [0, 0, 0], // Primary stroke (black) - The color of the background
-            [0, 0, 0], // Secondary stroke (black) - Can be anything, unused value for now,
-            3, // Strokeweight of 2px by default
-        );
-
-        // holding values
-        this.completion = 0.0; // float value between 0 and 1 
+        this.trackHeight = 6;
     }
 
-    // static values for tracking
-    static selectedSlider = null;
+    // Old name for `value`
+    get completion() { return this.value; }
+    set completion(v) { this.value = v; }
 
-
-    // helper function to select the current slider (Under MousePressed)
-    select() {
-        if(Slider.selectedSlider == null) {
-            // If the global selected slider is null, then set it to this
-            let xOverlap = mouseX > this.x && mouseX < (this.x + this.width);
-            let yOverlap = mouseY > this.y && mouseY < (this.y + this.height);
-
-            if(xOverlap && yOverlap) Slider.selectedSlider = this;
-        } else if(Slider.selectedSlider == this) {
-            // If this is the global selected slider, modify the value
-            this.completion = (mouseX - this.x) / this.width;
-        }
-
-        // coerce completion value
-        if(this.completion < 0) this.completion = 0;
-        if(this.completion > 1) this.completion = 1;
+    knobRadius(b) {
+        return min(b.h / 2, 12);
     }
 
+    // Runs every frame the mouse is held after pressing the slider, even if it leaves the box
+    onDrag(b) {
+        const r = this.knobRadius(b);
+        const before = this.value;
+        this.value = (mouseX - b.left - r) / (b.w - r * 2);
+        if (this.value !== before) this.onChange(this.value);
+    }
 
-    render() {
-        // Background
-        noStroke();
-        fill(this.strokeStyle.primaryColor);
-        rect(this.x, this.y, this.width, this.height);
+    draw(b) {
+        const r = this.knobRadius(b);
+        const knobX = b.left + r + (b.w - r * 2) * this.value;
+        const midY = b.top + b.h / 2;
+        const engaged = max(this.hoverT, this.pressT);
 
-        // Slider value
-        fill(this.style.primaryColor); // Fill to primary color
-        if(Slider.selectedSlider == this) fill(this.style.secondaryColor); // Fill to secondary color if active
-        rect(this.x, this.y, this.width * this.completion, this.height); // Draw the rectangle
+        // Track, filled up to the knob
+        const color = UIElement.mix(this.style.primaryColor, this.style.secondaryColor, engaged);
+        const trackH = min(this.trackHeight, b.h);
+        const track = { left: b.left, top: midY - trackH / 2, w: b.w, h: trackH };
+        this.drawTrack(track, (knobX - b.left) / b.w, color);
 
-
-        // Stroke
-        noFill(); // Clear the fill to make it transparent
-        stroke(this.strokeStyle.primaryColor);
-        strokeWeight(this.strokeStyle.weight);
-        rect(this.x, this.y, this.width, this.height);
-
-        if(mouseIsPressed) {
-            // Execute the select function when the mouse is down
-            this.select();
-        } else {
-            // When the mouse is no longer down, release control of the global selected slider
-            // only if this is the controlling slider
-            if(Slider.selectedSlider == this) Slider.selectedSlider = null;
+        // Halo while dragging
+        if (this.pressT > 0.01) {
+            noStroke();
+            fill([...color.slice(0, 3), 50 * this.pressT]);
+            circle(knobX, midY, (r + 6 * this.pressT) * 2);
         }
+
+        // Knob
+        UIElement.shadow(5, 1, 0.3);
+        fill(UITheme.surface);
+        stroke(color);
+        strokeWeight(2);
+        circle(knobX, midY, (r - 1 + engaged) * 2);
     }
 }
