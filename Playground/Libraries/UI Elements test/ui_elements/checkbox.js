@@ -1,76 +1,72 @@
 // class checkbox
-// REQUIRES ui-styles.js
+// REQUIRES: ui-styles.js, ui-element.js
 
+//! Checkbox class
+// style.primaryColor = color when checked, style.secondaryColor = color when unchecked
+class Checkbox extends UIElement {
+    constructor(x, y, checked = false, onChange = () => {}) {
+        super(x, y, 24, 24); // change width / height after creating to resize the box
+        this.checked = checked;
+        this.onChange = onChange;
+        this.label = '';     // optional text drawn to the right, clicking it also toggles
+        this.labelGap = 10;
 
-//! Checbox class
-class Checkbox {
-    // TODO: See if necessary to include a width and height
-    constructor(x, y, enabled = false) {
-        this.x = x;
-        this.y = y;
-        this.enabled = enabled; // Im pretty sure this needs to be a pointer but I have to figure out how it works in js 
-    
-        // consts
-        this.width = 50;
-        this.height = 50;
-
-        // Default styles
-        this.style = new UIStyle(
-            [0, 255, 0], // Primary color - Color when selected
-            [255, 255, 255], // Secondary color - Color when unselected
-        )
-
-        // Default stroke style
-        this.strokeStyle = new StrokeStyle(
-            [0, 0, 0], // primary color - default stroke
-            [0, 0, 0], // Secondary color - unused for now,
-            3, // Stroke weight, default 3px
-        );
+        this.cornerRadius = 6;
+        this.style = new UIStyle(UITheme.accent, UITheme.surface);
+        this.checkT = checked ? 1 : 0; // animates the tick
     }
 
-    // Static functions to render all the checkboxes inside a containing array
-    static renderAllCheckboxes(arr) {
-        for(let checkbox of arr) {
-            checkbox.render();
+    // Old name for `checked`
+    get enabled() { return this.checked; }
+    set enabled(v) { this.checked = v; }
+
+    // The clickable area grows to include the label
+    getBounds() {
+        const b = super.getBounds();
+        if (this.label) {
+            push();
+            this.applyTextStyle();
+            b.w += this.labelGap + textWidth(this.label);
+            pop();
         }
-    }
-
-    // Static function to handle all the clicks of the chcekboxes in an array
-    static handleCheckboxClicks(arr) {
-        for(let checkbox of arr) {
-            checkbox.onClick();
-        }
-    }
-
-    // Helper function to see if the mouse is over the checkbox
-    isHover() {
-        let xOverlap = (mouseX > this.x) && (mouseX < (this.x + this.width));
-        let yOverlap = (mouseY > this.y) && (mouseY < (this.y + this.height));
-
-        return xOverlap && yOverlap;
-    }
-
-    render() {
-        // Background
-        noStroke();
-        fill(this.strokeStyle.primaryColor);
-        rect(this.x, this.y, this.width, this.height);
-
-        // Set the style 
-        fill(this.style.secondaryColor);
-        if(this.enabled) fill(this.style.primaryColor);
-        rect(this.x, this.y, this.width, this.height);
-
-        // outline
-        stroke(this.strokeStyle.primaryColor);
-        strokeWeight(this.strokeStyle.weight);
-        noFill();
-        rect(this.x, this.y, this.width, this.height);
+        return b;
     }
 
     onClick() {
-        if(this.isHover()) {
-            this.enabled = !this.enabled;
+        this.checked = !this.checked;
+        this.onChange(this.checked);
+    }
+
+    draw(b) {
+        this.checkT += ((this.checked ? 1 : 0) - this.checkT) * 0.3;
+
+        const size = b.h;
+        const box = { left: b.left, top: b.top, w: size, h: size };
+
+        this.drawFocusRing(box, this.hoverT * 0.8);
+
+        // Box: fills with the checked color, outline follows it
+        const fillColor = UIElement.mix(this.style.secondaryColor, this.style.primaryColor, this.checkT);
+        const resting = UIElement.mix(this.strokeStyle.primaryColor, this.strokeStyle.secondaryColor, this.hoverT);
+        const outline = UIElement.mix(resting, this.style.primaryColor, this.checkT);
+        this.drawBox(box, fillColor, outline, this.strokeStyle.weight);
+
+        // Tick
+        if (this.checkT > 0.01) {
+            noFill();
+            stroke([...UITheme.onAccent.slice(0, 3), 255 * this.checkT]);
+            strokeWeight(size * 0.11);
+            strokeCap(ROUND);
+            strokeJoin(ROUND);
+            beginShape();
+            vertex(box.left + size * 0.27, box.top + size * 0.53);
+            vertex(box.left + size * 0.43, box.top + size * 0.69);
+            vertex(box.left + size * 0.74, box.top + size * 0.33);
+            endShape();
+        }
+
+        if (this.label) {
+            this.drawLabel(this.label, box.left + size + this.labelGap, box.top + size / 2, undefined, LEFT);
         }
     }
 }
