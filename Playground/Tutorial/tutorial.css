@@ -1,0 +1,287 @@
+/* =====================================================================
+   TUTORIAL PAGE STYLES
+   Shared by every level page. You don't need to read this to follow
+   the tutorial - the p5.js code lives in each level's sketch.js.
+   ===================================================================== */
+
+:root {
+  --bg: #f6f3ee;
+  --card: #ffffff;
+  --ink: #23211f;
+  --muted: #6b665f;
+  --line: #e3ddd3;
+  --accent: #3d6fd6;
+  --accent-soft: #e6eefc;
+  --warn: #b5530f;
+  --warn-soft: #fdf0e4;
+  --good: #2f8a55;
+  --good-soft: #e5f4ea;
+  --code-bg: #f1ede6;
+  --kbd-bg: #fbfaf7;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1b1a19;
+    --card: #252422;
+    --ink: #ece8e1;
+    --muted: #a29c93;
+    --line: #3a3835;
+    --accent: #7ea6ff;
+    --accent-soft: #24304a;
+    --warn: #f0a467;
+    --warn-soft: #3a2a1d;
+    --good: #6fcf97;
+    --good-soft: #1f3528;
+    --code-bg: #302e2b;
+    --kbd-bg: #2e2c29;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+/* ---------- Header ---------- */
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.crumb {
+  margin: 0 0 4px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.stars {
+  margin-left: 8px;
+  font-size: 16px;
+  vertical-align: middle;
+  color: #e0a100;
+}
+
+.nav {
+  display: flex;
+  gap: 8px;
+}
+
+.nav a,
+.nav span {
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.nav a:hover { border-color: var(--accent); color: var(--accent); }
+.nav span { opacity: 0.4; }
+
+/* ---------- Two-column layout ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: 432px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Let columns shrink below the canvas's 400px on small screens */
+.layout > * { min-width: 0; }
+
+@media (max-width: 860px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+/* Left column sticks while you scroll the tips */
+.play {
+  position: sticky;
+  top: 16px;
+}
+
+@media (max-width: 860px) {
+  .play { position: static; }
+}
+
+/* p5 puts the canvas inside <main> automatically */
+main.stage {
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  line-height: 0;
+}
+
+main.stage canvas {
+  display: block;
+  max-width: 100%;
+  height: auto !important;
+  border-radius: 6px;
+}
+
+.hint {
+  margin: 10px 4px 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- Cards ---------- */
+
+.card {
+  margin-top: 16px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.tips .card:first-child { margin-top: 0; }
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.card p { margin: 0 0 10px; }
+.card p:last-child,
+.card ul:last-child,
+.card ol:last-child { margin-bottom: 0; }
+
+.card ul,
+.card ol { margin: 0 0 10px; padding-left: 20px; }
+.card li { margin-bottom: 6px; }
+
+.card.idea { border-left: 4px solid var(--accent); }
+.card.warn { border-left: 4px solid var(--warn); background: var(--warn-soft); }
+.card.warn h2 { color: var(--warn); }
+.card.try  { border-left: 4px solid var(--good); }
+.card.try h2 { color: var(--good); }
+
+/* ---------- Controls list ---------- */
+
+.controls {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.controls li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.controls li:last-child { border-bottom: 0; }
+
+.keys { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; justify-content: flex-end; }
+
+kbd {
+  display: inline-block;
+  min-width: 28px;
+  padding: 2px 7px;
+  border: 1px solid var(--line);
+  border-bottom-width: 3px;
+  border-radius: 6px;
+  background: var(--kbd-bg);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  transition: transform 0.05s, background 0.1s, border-color 0.1s;
+}
+
+/* tutorial.js adds .down while the key / mouse button is held */
+kbd.down {
+  transform: translateY(2px);
+  border-bottom-width: 1px;
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.or { font-size: 12px; color: var(--muted); }
+
+/* ---------- Code ---------- */
+
+code {
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--code-bg);
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.88em;
+}
+
+pre {
+  margin: 0 0 10px;
+  padding: 10px 12px;
+  overflow-x: auto;
+  border-radius: 8px;
+  background: var(--code-bg);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+pre code { padding: 0; background: none; font-size: inherit; }
+
+.section-ref {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* ---------- Small comparison table ---------- */
+
+table {
+  width: 100%;
+  margin: 0 0 10px;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th, td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+th { color: var(--muted); font-weight: 600; }
